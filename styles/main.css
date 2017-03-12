@@ -51,8 +51,12 @@ body{
     text-decoration: none;
     cursor: pointer;
 }
-.links-container .navbar-link:hover{
+.links-container .navbar-link:hover{  
     color: rgb(233,50,117);
+}
+.links-container .navbar-link:active{  //* work for assignment 5 *//
+    color: rgb(233,50,117);
+    background-color: white;
 }
 .container{
     margin: 0 auto;
