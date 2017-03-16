@@ -27,6 +27,24 @@ var albumPicasso = {
        { title: 'Wrong phone number', duration: '2:15'}
    ]   
  };
+
+ var albumACDC = {
+   title: 'Greatest Hits',
+   artist: 'AC/DC',
+   label: 'Rock',
+   year: '1982',
+   albumArtUrl: 'assets/images/album_covers/19.png',
+   songs: [
+       { title: 'For those who vow to rock', duration: '1:01' },
+       { title: 'Hells bells', duration: '5:01'},
+       { title: 'You shook me all night long', duration: '3:21'},
+       { title: 'Thunderstruck', duration: '3:14'},   
+       { title: 'Highway to hell', duration: '2:15'}
+   ]   
+ };
+
+
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -38,7 +56,13 @@ var albumPicasso = {
  
      return template;
  };
-    
+
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  var setCurrentAlbum = function(album) {
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
@@ -60,4 +84,14 @@ var albumPicasso = {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
- };
+     
+    var albumList = [albumPicasso, albumMarconi, albumACDC];
+    var index = 0;
+    albumImage.addEventListener("click", function(event){
+        setCurrentAlbum(albumList[index]);
+        index++;
+        if(index == albumList.length){
+            index = 0;
+        }
+    });
+};
