@@ -58,15 +58,19 @@ var albumPicasso = {
      }
  };
 
- var findParentByClassName = function(element, targetClass){
-         if(element){
-             var currentParent = element.parentElement;
-             while(currentParent.className !== targetClass && currentParent.className !== null){
-                 currentParent = currentParent.parentElement;
-             }
-             return currentParent;
-         }
+var findParentByClassName = function(element, targetClass){
+    var currentParent = element.parentElement;
+  
+    if(element.parentElement == null){
+        console.log("No parent found.")
+    }else if(currentParent.className !== targetClass && currentParent.className !== null){
+        currentParent = currentParent.parentElement;
+        return currentParent;
+    }else{
+        console.log("No parent of this class found.")
+    }
  };
+
 var getSongItem = function(element){
     switch(element.className){
         case 'album-song-button':
