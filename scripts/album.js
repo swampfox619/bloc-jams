@@ -154,18 +154,18 @@ var setSong = function (songNumber) {
 };
 
 var togglePlayFromPlayerBar = function() {
-  var songNumberCell = $(this).find('.song-item-number');
-  if(currentSoundFile.play()) {
-      songNumberCell.html(playButtonTemplate);
-      $(this).html(playerBarPlayButton);
-      currentSoundFile.pause();      
-  }
- if(currentSoundFile.pause()){
-      songNumberCell.html(pauseButtonTemplate);
-      $(this).html(playerBarPauseButton);
-      currentSoundFile.play();
-  }
-};
+    //here is the correct variable
+    var songNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    if(currentSoundFile.isPaused()) {
+       $(this).html(playerBarPauseButton);
+       currentSoundFile.play();
+       songNumberCell.html(pauseButtonTemplate);
+   }else{
+       $(this).html(playerBarPlayButton);
+       currentSoundFile.pause();  
+       songNumberCell.html(playButtonTemplate);
+    }
+ };
 
 var setVolume = function(volume) {
     if (currentSoundFile) {
