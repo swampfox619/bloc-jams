@@ -3,7 +3,7 @@
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
  
@@ -98,6 +98,7 @@ var updateSeekBarWhileSongPlays = function() {
             var seekBarFillRatio = this.getTime() / this.getDuration();
             var $seekBar = $('.seek-control .seek-bar');
             
+            setCurrentTimeInPlayerBar();
             updateSeekPercentage($seekBar, seekBarFillRatio);
         });
     }
@@ -207,6 +208,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    setTotalTimeInPlayerBar();
 };
 
 var setSong = function (songNumber) {
@@ -253,6 +255,27 @@ var getSongNumberCell = function (number) {
   return $('.song-item-number[data-song-number="' + number + '"]');
     
 };
+
+var setCurrentTimeInPlayerBar = function(currentTime) {
+    var currentTime = $('.current-time');
+    $('.current-time').text(filterTimeCode(currentSoundFile.getTime()));
+};
+
+var setTotalTimeInPlayerBar = function(totalTime) {
+    var totalTime = $('.total-time');
+    $('.total-time').text(filterTimeCode(currentSongFromAlbum.duration));
+};
+
+var filterTimeCode = function(timeInSeconds) {
+  var time = parseFloat(timeInSeconds);
+  var seconds = Math.floor(time % 60);
+  var minutes = Math.floor((time - seconds) / 60);    
+  
+  return minutes + ":" + seconds;
+    
+};
+
+
 
  var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
  var pauseButtonTemplate ='<a class="album-song-button"><span class="ion-pause"></span></a>';
